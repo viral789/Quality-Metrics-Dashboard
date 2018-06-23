@@ -1,0 +1,15 @@
+<div class="modal-header">
+	<a class="cancelModal" href="" ng-click="ok()"><i class="glyphicon glyphicon-remove"></i></a>
+	<h2>{{projectName}}</h2>
+</div>
+<div class="modal-body"	>
+	<div class = "col-lg-6" ng-repeat="graph in graphInProject">
+		<high-chart chart = '{{graph.series}}'></high-chart>
+	</div>
+	
+</div>
+<div class="modal-footer">
+	<div class="col-sm-offset-3 col-sm-9">
+		<input type="submit" class="btn btn-primary " value="OK" ng-click="ok()"/>
+	</div>
+</div>

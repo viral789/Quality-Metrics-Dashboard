@@ -1,0 +1,17 @@
+<div class="modal-body">
+	<form role="form" name="viewMatchingUser">
+       
+        <table align="center" border="1"class="table table-hover table-bordered table-striped">
+        	<tbody>
+        		<tr ng-repeat="view in allMatchingName" ng-click="setSelected(view.id)">
+                	<td><input type="radio" name="matchingName" ng-model="view.checkName" /><span>{{view.givenName}}</span></td>
+            	</tr>
+        	</tbody>
+        </table>
+	</form>
+</div>
+<div class="modal-footer">
+    <div class="col-sm-offset-3 col-sm-9">
+        <input type="submit" class="btn btn-primary " value="Save" ng-click="saveForm()" />
+    </div>
+</div>

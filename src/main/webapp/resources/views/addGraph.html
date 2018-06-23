@@ -1,0 +1,57 @@
+<div class="modal-header">
+	<a class="cancelModal" href="" ng-click="cancelForm()"><i class="glyphicon glyphicon-remove"></i></a>
+	<h2>{{projectName}}</h2>
+</div>
+<div class="modal-body">
+	<form role="form" name="addGraphs">
+		<input type="hidden" ng-model="EditableGraphDash.g_id" />
+		<fieldset>
+			<legend>
+				{{name3}}
+			</legend>
+                <div ng-repeat="graph in graphInSprint">
+                    <div>
+                    	<div style="float: left" ng-model="graph.graph_name"><strong>{{graph.graph_name}} [{{graph.validRange}}]</strong></div>
+                    	<div style="float: right"><input type="checkbox" name="NotApplicable" ng-model="graph.na" /><span class="spanText">Not applicable for this sprint</span></div>
+                    </div>
+                    <br>
+                    <div style="margin-left:40px;">
+	                    <div ng-show="!graph.na">
+	                    	<ng-form name="inputvalueForm{{index}}">
+			                    <div ng-class="{ 'has-error' : inputvalueForm{{index}}.color.$invalid && !inputvalueForm{{index}}.color.$pristine}">
+			                    	<input ng-keyup="getValue($event)" ng-keypress="change($event)" type="text" name="color" id="color" class="form-control" ng-model="graph.inputvalue" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" ng-change="getColor(graph.inputvalue, graph.validRange, graph.graph_name, $index)" ng-required = "true"/>
+			                    	<p ng-show="inputvalueForm{{index}}.color.$invalid && !inputvalueForm{{index}}.color.$pristine" class="help-block">Input value is required.</p>
+			                    </div>	
+		                    </ng-form>
+		                    <div ng-show="graph.color=='red' && graph.inputvalue !=null">
+		                    	<label for="ActionPlan">Action Plan</label>
+		                    	<ng-form name="actionPlan{{index}}">
+			                    	<div ng-class="{ 'has-error' : actionPlan{{index}}.Plan.$invalid && !actionPlan{{index}}.Plan.$pristine }">
+			                			<textarea ng-keyup="getValue($event)" ng-keypress="change($event)" name="Plan" id="Plan" class="form-control" rows="5" cols="30" ng-model="graph.action_plan" ng-required = "graph.color=='red'"></textarea>
+			                			<p ng-show="actionPlan{{index}}.Plan.$invalid && !actionPlan{{index}}.Plan.$pristine" class="help-block">Action plan is required.</p>
+			                			<br>
+			                		</div>
+			                	</ng-form>
+		                    </div>
+	                    </div>
+	                    <div ng-show="graph.na">
+	                    	<label for="Remark">Remark</label>
+		                    	<ng-form name="remark{{index}}">
+			                    	<div ng-class="{ 'has-error' : remark{{index}}.Plan.$invalid && !remark{{index}}.Plan.$pristine }">
+			                			<textarea ng-keyup="getValue($event)" ng-keypress="change($event)" name="Plan" id="Plan" class="form-control" rows="5" cols="30" ng-model="graph.action_plan" ng-required = "graph.color=='red'"></textarea>
+			                			<p ng-show="remark{{index}}.Plan.$invalid && !remark{{index}}.Plan.$pristine" class="help-block">Remark is required.</p>
+			                			<br>
+			                		</div>
+			                	</ng-form>
+	                    </div>
+	                </div>
+                </div>
+		</fieldset>
+	</form>
+</div>
+<div class="modal-footer">
+	<div class="col-sm-offset-3 col-sm-9">
+        <input type="button" class="btn btn-default " value="Cancel" ng-click="cancelForm()" />
+        <input type="submit" class="btn btn-primary " value="Save" ng-click="saveForm()"/>
+    </div>
+</div>

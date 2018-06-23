@@ -1,0 +1,33 @@
+<div class="modal-header">
+	<a class="cancelModal" href="" ng-click="ok()"><i class="glyphicon glyphicon-remove"></i></a>
+	<h2>{{projectName}} </h2>
+	<div ng-repeat ="graph in graphOverallResult" class="float-right" style="float: right; margin-top: -51px; margin-right: 50px"><img ng-src="{{graph | Percent}}"></div>
+</div>
+<div class="modal-body">
+	<div class="form-group">
+		<table border="1" class="table table-hover table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>{{name3}}</th>
+                <th align="center" style=" text-align:center; width: 10%">Metrics Value</th>
+                <th align="center" style=" text-align:center; width: 5%">Status</th>
+                <th style="width: 50%">Action Plan</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr ng-repeat="graph in graphInProject">
+                <td>{{graph.g_name}}</td>
+                <td align="center">{{graph.inputvalue}}</td>
+                <td align="center"><img src="{{graph.smilley}}"></td>
+                <td>{{graph.action_plan}}</td>
+            </tr>
+        </tbody>
+    </table>
+	</div>
+</div>
+<div class="modal-footer">
+	<div class="col-sm-offset-3 col-sm-9">
+		<input type="submit" class="btn btn-primary " value="OK" ng-click="ok()"/>
+	</div>
+</div>

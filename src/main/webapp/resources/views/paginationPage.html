@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="float-left col-xs-3 col-md-3 bold pad-top-20">
+        <div class="float-left pad-right-10">
+        	<label for="Records">Records per page:</label>
+        </div>
+        <select class="btn btn-default dropdown-toggle" ng-model="recordsPerPage"
+                ng-options="val for val in [3,6,9,12]" ng-change="changePageSize()">
+        </select>
+    </div>
+    <div class="float-right col-xs-4 col-md-4" style="float: right;">
+        <div class="float-right" style="float: right;">
+            <ul class="pagination">
+                <li ng-class="{'disabled': (currentIndex==0 || getNumberOfPages(list,recordsPerPage)<=3)}"><a class="button-height" href="#" ng-click="decrementCurrentIndex()"><i class="glyphicon glyphicon-backward"></i></a>
+                        </li>
+                <li ng-repeat="n in getPages(list,recordsPerPage,currentIndex) track by $index" ng-class="{'active' : currentIndex === n}"><a ng-click="changeIndex(n)">{{n+1}}</a></li>
+                <li ng-class="{'disabled':(currentIndex==(getNumberOfPages(list,recordsPerPage)-1) || getNumberOfPages(list,recordsPerPage)<=3)}"><a class="button-height" href="#"  ng-click="incrementCurrentIndex()"><i class="glyphicon glyphicon-forward"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

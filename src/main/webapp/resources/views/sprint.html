@@ -1,0 +1,38 @@
+<input type="button" class="btn btn-primary btncolor" value=" Add {{name}}" ng-disabled ="!authorization($index)" 
+	ng-click="sprintbtn()" />
+<br />
+<br />
+<div class="form-group">
+	<table align="center" border="1" class="table table-hover table-bordered table-striped" style="width:85%;">
+		<thead>
+			<tr>
+				<th style="width:9%; ">{{name}}</th>
+				<th style="width:10%; ">Meeting Date</th>
+				<th style="width:10%; ">Meeting Status</th>
+				<th align="center" style=" text-align:center; width:10%; ">Update {{name3}}</th>
+				<th align="center" style=" text-align:center; width:10%; ">Update {{name}}</th>
+				<th align="center" style=" text-align:center; width:10%; ">Delete {{name}}</th>
+				<th align="center" style=" text-align:center; width:10%; ">View Dashboad</th>
+			</tr>
+		</thead>
+		 <tbody>
+            <tr ng-repeat="dash in sprints | pageDisplay:eventLogObjects.pageSize:eventLogObjects.currentPageIndex">
+                <td>{{dash.s_name}}</td>
+                <td>{{dash.date}}</td>
+                <td>
+                	<div>
+                		<img src="resources/images/icn-red.png" alt=""><span tooltip={{dash.redproject}} tooltip-placement="right" tooltip-trigger="mouseenter" > - {{dash.noOfRed}}</span><br>
+	    				<img src="resources/images/icn-yellow.png" alt=""><span tooltip={{dash.yellowproject}} tooltip-placement="right" tooltip-trigger="mouseenter" >- {{dash.noOfYellow}} </span><br>
+	    				<img src="resources/images/icn-green.png" alt=""><span tooltip={{dash.greenproject}} tooltip-placement="right" tooltip-trigger="mouseenter" >- {{dash.noOfGreen}} </span><br>
+                	</div>
+                </td>
+                <td align="center" style="vertical-align: middle;"><input type="button" ng-disabled ="!authenticate" value="Update" class="btn btn-primary" ng-click="projectInSprint(dash.s_id)" /></td>
+                <td align="center" style="vertical-align: middle;"><input type="button" ng-disabled ="!authorization($index)" value="Update" class="btn btn-primary" ng-click="editSprint(dash.s_id)" /></td>
+                <td align="center" style="vertical-align: middle;"><input type="button" ng-disabled ="!authorization($index)" value="Delete" class="btn btn-primary" ng-click="deleteSprint(dash.s_id)" /></td>
+                <td align="center" style="vertical-align: middle;"><input type="button" value="View" class="btn btn-primary" ng-click="dashresult(dash.s_id)" /></td>
+            </tr>
+        </tbody>
+	</table>
+	<monitoring-paginate list="sprints" records-per-page="eventLogObjects.pageSize" 
+		current-index="eventLogObjects.currentPageIndex"></monitoring-paginate>
+</div>

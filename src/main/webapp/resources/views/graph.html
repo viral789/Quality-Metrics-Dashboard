@@ -1,0 +1,26 @@
+<input type="button" class="btn btn-primary" value=" Add {{name3}}" ng-disabled = "!authorization($index)"
+	ng-click="addgraph()"/>
+<br />
+<br />
+<div class="form-group">
+	<table align="center" border="1"class="table table-hover table-bordered table-striped" style="width:85%;">
+		<thead>
+			<tr>
+				<th style="width:30%;">{{name3}}</th>
+				<th style="width:35%";>{{name3}} Description</th>
+				<th align="center" style=" text-align:center; ">Update {{name3}}</th>
+				<th align="center" style=" text-align:center; ">Delete {{name3}}</th>
+			</tr>
+		</thead>
+		 <tbody>
+            <tr ng-repeat="gra in graph">
+                <td>{{gra.graph_name}}</td>
+                <td>{{gra.graphDescription}}</td>
+                <!--<td align="center" style="vertical-align: middle;"><h5 class="anchorColor" ng-if="!authorized">Update</h5><a class="anchorColor" ng-if="authorized" ng-click="edit(gra.graph_id)">Update</a></td>
+                <td align="center" style="vertical-align: middle;"><h5 class="anchorColor" ng-if="!authorized">Delete</h5><a class="anchorColor" ng-if="authorized" ng-click="deleteGraph(gra.graph_id)">Delete</a></td>-->
+				<td align="center" style="vertical-align: middle;"><input type="button" value="Update" class="btn btn-primary" ng-disabled = "!authorization($index)" ng-click="edit(gra.graph_id)" /></td>
+                <td align="center" style="vertical-align: middle;"><input type="button" value="Delete" class="btn btn-primary" ng-disabled = "!authorization($index)" ng-click="deleteGraph(gra.graph_id)"></td>
+            </tr>
+        </tbody>
+	</table>
+</div>

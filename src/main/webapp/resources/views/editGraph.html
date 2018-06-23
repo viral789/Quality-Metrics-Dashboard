@@ -1,0 +1,31 @@
+<div class="modal-header">
+    <h2>Edit {{name3}}</h2>
+</div>
+<div class="modal-body">
+    <form role="form" name="editGraph">
+        <input type="hidden" ng-model="EditableGraphDash.p_id" />
+        <label for="GraphName" class="col-sm-3 control-label">{{name3}}</label>
+        <div class="col-sm-9" ng-class="{ 'has-error' : editGraph.GraphName.$invalid && !editGraph.GraphName.$pristine }">
+            <input ng-keyup="getValue($event)" ng-keypress="change($event)" type="text" name="GraphName" id="GraphName" class="form-control" ng-model="EditableGraphDash.graph_name" required/>
+            <p ng-show="editGraph.GraphName.$invalid && !editGraph.GraphName.$pristine" class="help-block">Quality Metrics is required.</p>
+        </div>
+        <br>
+        <br>
+        <label for="graphDescription" class="col-sm-3 control-label">{{name3}} Description</label>
+        <div class="col-sm-9" ng-class="{'has-error' : editGraph.GraphDescription.$invalid && !editGraph.GraphDescription.$pristine }">
+        	<textarea ng-keyup="getValue($event)" ng-keypress="change($event)" name="GraphDescription" id="GraphDescription" class="form-control" rows="5" cols="30" ng-model="EditableGraphDash.graphDescription" required></textarea>
+        	<p ng-show ="editGraph.GraphDescription.$invalid && !editGraph.GraphDescription.$pristine" class="help-block">Description is required </p>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+	</form>
+</div>
+
+<div class="modal-footer">
+    <div class="col-sm-offset-3 col-sm-9">
+        <input type="button" class="btn btn-default " value="Cancel" ng-click="cancelForm()" />
+        <input type="submit" class="btn btn-primary " value="Save" ng-click="saveForm()" ng-disabled = "editGraph.$invalid"/>
+    </div>
+</div>
