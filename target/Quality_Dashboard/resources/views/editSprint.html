@@ -1,0 +1,37 @@
+<div class="modal-header">
+    <h2>{{name}} Details</h2>
+</div>
+<div class="modal-body">
+    <form role="form" name="editSprint">
+        <input type="hidden" ng-model="EditableSprintDash.s_id" />
+        <label for="sprintName" class="col-sm-3 control-label">{{name}} Name</label>
+        <div class="col-sm-9" ng-class="{ 'has-error' : editSprint.sprintName.$invalid && !editSprint.sprintName.$pristine }">
+            <input ng-keyup="getValue($event)" ng-keypress="change($event)" type="text" name="sprintName" id="sprintName" class="form-control" ng-required="true" ng-model="EditableSprintDash.s_name"/>
+            <p ng-show="editSprint.sprintName.$invalid && !editSprint.sprintName.$pristine" class="help-block">Sprint name is required.</p>
+        </div>
+        <br />
+        <br />
+        <br />
+        <label for="MeetingDate" class="col-sm-3 control-label">Meeting Date</label>
+        <div class="row">
+            <div class="col-sm-6" ng-class="{ 'has-error' : editSprint.MeetingDate.$invalid && !editSprint.MeetingDate.$pristine}">
+                <p class="input-group">
+                    <input  type="text" name="MeetingDate" id="MeetingDate" class="form-control" ng-model="EditableSprintDash.meeting_date" datepicker-popup="dd/MM/yyyy" ng-model="dts" is-open="openstart" min-date="minDate"
+                           max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-disabled = "true"/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="opens($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                    <p ng-show="editSprint.MeetingDate.$invalid && !editSprint.MeetingDate.$pristine" class="help-block">Date is required.</p>  
+                </p>
+            </div>
+        </div>
+        <br />
+        <br />
+    </form>
+</div>
+<div class="modal-footer">
+    <div class="col-sm-offset-3 col-sm-9">
+        <input type="button" class="btn btn-default " value="Cancel" ng-click="cancelForm()" />
+        <input type="submit" class="btn btn-primary " value="Save" ng-click="saveForm()" ng-disabled = "editSprint.$invalid" />
+    </div>
+</div>

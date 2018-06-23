@@ -1,0 +1,26 @@
+<div class="form-group">
+	<table align="center" border="1" class="table table-hover table-bordered table-striped" style="width:80%;">
+        <thead>
+            <tr>
+                <th style="width:13%;">Project Name</th>
+                <th style="width:13%;">TL/PL Name</th>
+                <th align="center" style=" text-align:center; width:13%;">View {{name3}} </th>
+                <th align="center" style=" text-align:center; width:13%;">Update {{name3}}</th>
+                <th align="center" style=" text-align:center; width:13%;">View {{name3}} Trends</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr ng-repeat="proj in projectInSprint">
+                <td>{{proj.p_name}}</td>
+                <td>{{proj.tl}}</td>
+                <!--<td align="center" style="vertical-align: middle;"><h5 class="anchorColor" ng-if="!authorized">View</h5><a class="anchorColor" ng-if="authorized" ng-click="viewGraph(proj.p_id)">View</a></td>
+                <td align="center" style="vertical-align: middle;"><h5 class="anchorColor" ng-if="!authorized">Update</h5><a class="anchorColor" ng-if="authorized" ng-click="addGraph(proj.p_id)">Update</a></td>
+                <td align="center" style="vertical-align: middle;"><h5 class="anchorColor" ng-if="!authorized">View</h5><a class="anchorColor" ng-if="authorized" ng-click="ViewTrends(proj.p_id)">View</a></td>-->
+				<td align="center" style="vertical-align: middle;"> <input type="button" value="View" class="btn btn-primary" ng-disabled = "!authorization($index)" ng-click="viewGraph(proj.p_id)" /></td>
+                <td align="center" style="vertical-align: middle;"><input type="button" value="Update" class="btn btn-primary" ng-disabled = "!authorization($index)" ng-click="addGraph(proj.p_id)" /></td>
+                <td align="center" style="vertical-align: middle;"><input type="button" value="View" class="btn btn-primary" ng-disabled = "!authorization($index)" ng-click="ViewTrends(proj.p_id)" /></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

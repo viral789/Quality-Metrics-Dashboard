@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
+		
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+	scope="singleton" lazy-init="false">
+		<property name="location" value="classpath:/LdapConfig.properties"/>
+	</bean>
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="scheduleMailCronTrigger"/>
+				<!-- <ref bean="scheduleMailCronTrigger1"/>
+				<ref bean="scheduleMailCronTrigger2"/>
+				<ref bean="scheduleMailCronTrigger3"/>
+				<ref bean="scheduleMailCronTrigger4"/>
+				<ref bean="scheduleMailCronTrigger5"/> -->
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="scheduleMailCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="scheduleMailJob"/>
+		<property name="cronExpression" value="00 40 11 ? * MONDAY,WEDNESDAY *"></property>
+	</bean>
+	
+	<!-- <bean id="scheduleMailCronTrigger1" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="scheduleMailJob"/>
+		<property name="cronExpression" value="00 00 13 ? * MONDAY#3"></property>
+	</bean>
+	
+	<bean id="scheduleMailCronTrigger2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="scheduleMailJob"/>
+		<property name="cronExpression" value="00 00 13 ? * MONDAY#5"></property>
+	</bean>
+	
+	<bean id="scheduleMailCronTrigger3" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="scheduleMailJob"/>
+		<property name="cronExpression" value="00 00 11 ? * WEDNESDAY#1"></property>
+	</bean>
+	
+	<bean id="scheduleMailCronTrigger4" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="scheduleMailJob"/>
+		<property name="cronExpression" value="00 00 11 ? * WEDNESDAY#3"></property>
+	</bean>
+	
+	<bean id="scheduleMailCronTrigger5" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="scheduleMailJob"/>
+		<property name="cronExpression" value="00 00 11 ? * WEDNESDAY#5"></property>
+	</bean> -->
+	
+	<bean id="scheduleMailJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+	<property name="jobClass" value="com.cnerge.dashboard.controller.SendMailController"/>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="sendMailService" value-ref="sendMailService"></entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="sendMailService" class="com.cnerge.dashboard.service.SendMailService">
+		<property name="mailSender" ref="mailSender"></property>
+	</bean>
+	
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="defaultEncoding" value="UTF-8"/>
+		<property name="host" value="secure.emailsrvr.com" />
+		<property name="port" value="465"/>
+		<property name="username" value="${mail.username}"/>
+		<property name="password" value="${mail.password}"/>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtps</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.ssl.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+		
+		
+</beans>

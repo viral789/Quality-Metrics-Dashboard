@@ -1,0 +1,41 @@
+<div ng-controller = "dashboard" style="width:1213px;">
+	<div>
+		<div style="float: left">
+			<img style="margin-top:5%;" src="resources/images/CTLogoAndName - Copy.png" alt="">
+		</div>
+		<div style="float: right">
+			<h1 style="font-size: 30px; color:#376092; margin-top:5%;">Quality Metrics Dashboard</h1>
+		</div>
+	</div>
+	<div>
+		<nav class="navbar navbar-inverse" style="top:71px; height: 55px">
+		  	<div class="container-fluid" style="background-color: #376092; height: 55px">
+		   		<div>
+		      		<ul class="nav navbar-nav" style="margin-left: -22%">
+		        		<li><a ui-sref = "SprintDetails" style="font-size: 20px; color: white;">Fiscal Week Details</a></li>
+		        		<li><a ui-sref = "ProjectDetails" style="font-size: 20px; color: white;">Project Details</a></li>
+		        		<li><a ui-sref = "GraphDetails" style="font-size: 20px; color: white;">Quality Metrics Details</a></li>
+		      		</ul>
+		      		<ul ng-show="!authenticate" class="nav navbar-nav navbar-right" style="margin-right: -27%">
+		        		<li><a style="font-size: 20px; color: white; cursor: pointer; cursor: hand; " ng-click="signin()"><span class="glyphicon"></span> Sign In</a></li>
+		      		</ul>
+		      		<ul ng-show="authenticate" class="nav navbar-nav navbar-right" style="margin-right: -30%">
+		      			<!-- <li style="font-size: 20px; color: white; margin-top: 6%;">Hi  {{userName}}</li> -->
+		      			<li><a style="font-size: 20px; color: white;">Hi  {{userName}}</a></li>
+		        		<li><a style="font-size: 20px; color: white; cursor: pointer; cursor: hand; " ng-click="logout()"><span class="glyphicon"></span> Log Out</a></li>
+		      		</ul>
+		    	</div>
+			  	</div>
+		</nav>
+	</div>
+	<div class="banner">
+		<br>
+		<br>
+		<img style="width:100%;" src="resources/images/QualityMetricsBanner.png" alt="">
+	</div>
+	<div>
+     	<br>
+	   	<div ui-view></div>
+   	</div>
+	
+</div>

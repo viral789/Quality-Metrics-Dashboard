@@ -1,0 +1,17 @@
+Hello All,
+
+Request to all of you to update the metrics data for latest completed sprint by Wednesday EOD. Provide the reason for not meeting the target and action plan for the same.
+  
+Update the metrics data in Quality Metrics Dashboard application using your windows credentials. Link to access the application : http://10.30.3.5:8080/Quality_Dashboard/
+
+Please watch the application demo from below mentioned location:
+\\10.1.1.2\projects\projects\CitiusTech\CT CNERGE\CT CNERGE_ISL0\Recordings\Quality dashboard application demo.wrf
+
+For any queries contact Viral Bhojani and Jai Matani
+ 
+Note: Kindly ignore the mail if the data is already updated
+
+
+Thanks
+Jai Matani
+# 7507915655 / 6258

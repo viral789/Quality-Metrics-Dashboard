@@ -1,0 +1,60 @@
+<div class="modal-header">
+    <h2>Update {{projectName}}</h2>
+</div>
+<div class="modal-body">
+    <form role="form" name="editGraphInProject" novalidate>
+        <input type="hidden" ng-model="EditableProjectDash.p_id" />
+        <label for="ProjectName" class="col-sm-3 control-label">{{name}} Name</label>
+        <div class="col-sm-9" ng-class="{ 'has-error' : editGraphInProject.ProjectName.$invalid && !editGraphInProject.ProjectName.$pristine }">
+            <input ng-keyup="getValue($event)" ng-keypress="change($event)" type="text" name="ProjectName" id="ProjectName" class="form-control" ng-model="EditableProjectDash.p_name" required/>
+            <p ng-show="editGraphInProject.ProjectName.$invalid && !editGraphInProject.ProjectName.$pristine" class="help-block">Project Name is required.</p>
+        </div>
+        <br />
+        <br />
+        <label for="QMSName" class="col-sm-3 control-label">QMS Name</label>
+        <div class="col-sm-9" ng-class="{ 'has-error' : editGraphInProject.QMSName.$invalid && !editGraphInProject.QMSName.$pristine }">
+            <input ng-keyup="getValue($event)" ng-keypress="change($event)" type="text" name="ProjectName" id="ProjectName" class="form-control" ng-model="EditableProjectDash.qms_name" required/>
+            <p ng-show="editGraphInProject.QMSName.$invalid && !editGraphInProject.QMSName.$pristine" class="help-block">QMS Name is required.</p>
+        </div>
+        <br />
+        <br />
+        <label for="lead" class="col-sm-3 control-label">TL/DL Name</label>
+        <div class="col-sm-9" ng-class="{ 'has-error' : editGraphInProject.lead.$invalid && !editGraphInProject.lead.$pristine }">
+            <input ng-keyup="getValue($event)" ng-keypress="change($event)" type="text" name = "lead" id="lead" class="form-control" ng-model="EditableProjectDash.tl" required />
+            <p ng-show="editGraphInProject.lead.$invalid && !editGraphInProject.lead.$pristine" class="help-block">TL name is required.</p>
+        </div>
+        <br />
+        <br />
+        <div style="margin-left: 28%;">
+       		<input type="submit" class="btn btn-primary " value="Check Name" ng-click="checkName(EditableProjectDash.tl)"/>
+        </div>
+        <br />
+        <div ng-repeat="graph in graph" ">
+           <input type="checkbox" name="graph_name" ng-model="graph.graph_checked" /><span tooltip={{graph.graphDescription}} tooltip-placement="right" tooltip-trigger="mouseenter"  style="margin-left: 10px; font-size: 16px">{{graph.graph_name}}</span><br />
+           <div ng-show= "graph.graph_checked" style="margin-left: 40px;">
+           		<!-- <label for="validRange" class="col-sm-3 control-label">Valid Range</label> -->
+           		<div>Goal</div>
+		        <div class="row">
+		        	<div class="form-group col-xs-3">
+		        		<select ng-model="graph.options" class="form-control" ng-options = "o as o for o in options"></select>
+		        	</div>
+		        	<div class="form-group col-xs-9">
+		        		<ng-form name="validinputForm{{index}}">
+		        			<div ng-class="{ 'has-error' : validinputForm{{index}}.validinput.$error.pattern}">
+		        				<input ng-keyup="getValue($event)" ng-keypress="change($event)" type="text" ng-pattern="/^[0-9]+$/" name = "validinput" id="validinput" class="form-control" ng-model="graph.validinput"/>
+		        				<p ng-show="validinputForm{{index}}.validinput.$error.pattern" class="help-block">Only numbers are allowed</p>
+		        			</div>
+		        		</ng-form>
+		        	</div>
+			    </div>
+           </div>
+       </div>
+	</form>
+</div>
+
+<div class="modal-footer">
+    <div class="col-sm-offset-3 col-sm-9">
+        <input type="button" class="btn btn-default " value="Cancel" ng-click="cancelForm()" />
+        <input type="submit" class="btn btn-primary " value="Save" ng-click="saveForm()" ng-disabled = "editGraphInProject.$invalid"/>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="dashmodal">
+	<div id="print">
+	<div class="modal-header">
+		<a class="cancelModal" href="" ng-click="cancelForm()"><i class="glyphicon glyphicon-remove"></i></a> 
+	    <h1 style="text-align:left; color: white;">Quality Metrics Dashboard</h1>
+	    <b class="float-right" style="float: right; margin-top:-2%; color: white;">{{date}}</b>
+	</div>
+	<div class="modal-body" id="printbody" tabindex="0">
+	    <form role="form">
+	    	<div class="dashimage"">
+		    	<img src="resources/images/icn-green.png" alt=""><span style="padding-right: 30px"> - Good</span>
+		    	<img src="resources/images/icn-red.png" alt=""><span style="padding-right: 30px"> - Critical</span>
+		    	<img src="resources/images/icn-yellow.png" alt=""> <span style="padding-right: 30px"> - Improving</span>
+		    </div>
+		    <br>
+	        <table border="1" class="table table-hover table-bordered table-striped">
+	            <thead>
+	                <tr>
+	                    <th>Project/Team</th>
+	                    <th>DL/PL</th>
+	                    <th align="center" style=" text-align:center;">Overall Status</th>
+	                    <th style="width: 110px">Details</th>
+	                    <th>Action Plan</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+	                <tr ng-repeat="dash in dashresult">
+	                    <td><a href="#/SprintDetails" ng-click="ViewTrends(dash.p_id)">{{dash.p_name}}</a></td>
+	                    <td>{{dash.tl}}</td>
+	                    <td align="center"><img ng-src="{{dash.Graph | Percent}}" ></td>
+	                    <td>
+	                    	<div ng-if = "dataProvided(dash.Graph)">
+		                       {{dash.Graph | graphcount:'red'}}/{{dash.Graph | totalgraphcount}} are Red <br />
+		                       {{dash.Graph | graphcount:'green'}}/{{dash.Graph | totalgraphcount}} are Green<br/>
+		                       {{dash.Graph | nacount }}/{{dash.Graph | totalgraphcount}} are NA 
+	                       </div>
+	                    </td>
+	                    <td>
+	                    	<div ng-if="dataProvided(dash.Graph)" ng-repeat = "graph in dash.Graph | ActionPlan">
+	                    		<b>{{graph.g_name}} </b> : <br><p ng-class="{red: graph.na == false , black : graph.na == true}">{{graph.action_plan}}</p><br/>
+	                    	</div>
+	                    	<div ng-if="!dataProvided(dash.Graph)" >
+								<p style="color : red;">Data not provided</p>
+							</div>
+	                    </td>
+	                </tr>
+	            </tbody>
+	        </table>
+	    </form>
+	</div>
+	</div>
+	<div class="modal-footer">
+	    <div class="col-sm-offset-3 col-sm-9">
+	        <input type="button" class="btn btn-primary " value="Print" ng-click="printForm('print')" />
+	        <input type="button" class="btn btn-primary " value="Cancel" ng-click="cancelForm()" />
+	    </div>
+	</div>
+</div>
